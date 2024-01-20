@@ -2,3 +2,6 @@
 *.d
 *~
 *.su
+build-linux/*
+build-riscv/*
+.vscode
