@@ -27,6 +27,14 @@ EXEC_TO_CLEAN = $(BUILD_DIR)/ec_self_tests $(BUILD_DIR)/ec_utils $(BUILD_DIR)/ec
 # all and clean, as you might expect
 all: $(LIBS) $(TESTS_EXEC)
 
+static-lib: $(LIBARITH) $(LIBEC)
+	mkdir -p build-linux/
+	cp $(BUILD_DIR)/*.a build-linux/
+
+# riscv-static-lic:
+# 	echo $(LIBECC_NOSTDLIB)
+# 	./mybuild.sh
+
 # Default object files extension
 OBJ_FILES_EXTENSION ?= o
 
@@ -38,7 +46,13 @@ clean:
 	@find $(BUILD_DIR)/ -name '*.so' -exec rm -f '{}' \;
 	@find . -name '*~'  -exec rm -f '{}' \;
 
+clean-linux:
+	rm -rf build-linux/
 
+clean-riscv:
+	rm -rf build-riscv/
+
+clean-build: clean-build-linux clean-build-riscv
 
 # --- Source Code ---
 
@@ -88,7 +102,7 @@ $(LIBARITH): $(LIBARITH_OBJECTS)
 	$(VERBOSE_MAKE)$(CROSS_COMPILE)$(AR) $(AR_FLAGS) $@ $^
 	$(VERBOSE_MAKE)$(CROSS_COMPILE)$(RANLIB) $(RANLIB_FLAGS) $@
 
-LIBEC_SRC = $(LIBARITH_SRC) $(CURVES_SRC) $(UTILS_EC_SRC)
+LIBEC_SRC = $(LIBARITH_SRC) $(CURVES_SRC) $(UTILS_EC_SRC) $(HASH_SRC) $(EXT_DEPS_SRC) $(KEY_SRC)
 LIBEC_OBJECTS = $(patsubst %,$(OBJ_DIR)/%.$(OBJ_FILES_EXTENSION),$(basename $(LIBEC_SRC)))
 $(LIBEC): $(LIBEC_OBJECTS)
 	$(VERBOSE_MAKE)$(CROSS_COMPILE)$(AR) $(AR_FLAGS) $@ $^
