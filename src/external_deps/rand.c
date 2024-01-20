@@ -117,5 +117,12 @@ err:
  *	and caches with other possibly malicious processes, a microcontroller
  *	that can be observed using EM probes or power consumtion, ...).
  */
-#error "rand.c: you have to implement get_random with a proper entropy source!"
+int get_random(unsigned char *buf, u16 len)
+{
+	//Implement HW random here
+	// return fimport(buf, len, "/dev/urandom");
+	return 0;
+}
+
+// #error "rand.c: you have to implement get_random with a proper entropy source!"
 #endif

@@ -27,5 +27,9 @@ void ext_printf(const char *format, ...)
 	va_end(arglist);
 }
 #else
-#error "print.c: you have to implement ext_printf"
+void ext_printf(const char *format, ...)
+{
+	//Dummy print
+}
+// #error "print.c: you have to implement ext_printf"
 #endif
