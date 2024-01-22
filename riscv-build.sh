@@ -13,8 +13,8 @@ make clean
 
 CROSS_COMPILE=riscv64-unknown-elf- CC=gcc CFLAGS="-march=rv32imac -mabi=ilp32 -W -Wextra -Wall -Wunreachable-code \
 -pedantic -fno-builtin -std=c99 -Os \
--ffreestanding -fno-builtin -nostdlib -DWORDSIZE=32 \
---specs=htif_nano.specs -DCUSTOM_RAND_GENERATE" \
+-ffreestanding -fno-builtin -nostdlib \
+--specs=htif_nano.specs -DCUSTOM_RAND_GENERATE -DWORDSIZE=32 -DUSER_NN_BIT_LEN=256" \
 LDFLAGS="-T htif.ld" \
 make build/libarith.a build/libec.a
 mkdir -p build-riscv/
