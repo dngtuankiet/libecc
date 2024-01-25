@@ -31,4 +31,11 @@
 LIBECC_FORMAT_FUNCTION(1, 2)
 void ext_printf(const char *format, ...);
 
+#ifdef CUSTOM_RISCV_PRINT
+    extern void kprintf(const char *fmt, ...);
+    #undef  CUSTOM_KPRINTF
+    #define CUSTOM_KPRINTF  kprintf
+#endif
+
+
 #endif /* __PRINT_H__ */

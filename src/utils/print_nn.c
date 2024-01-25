@@ -27,7 +27,8 @@ void nn_print(const char *msg, nn_src_t a)
 		   a->wlen * WORD_BYTES * 8);
 
 	for (w = a->wlen - 1; w >= 0; w--) {
-		ext_printf(PRINTF_WORD_HEX_FMT, a->val[w]);
+		// ext_printf(PRINTF_WORD_HEX_FMT, a->val[w]);
+		ext_printf("%x", a->val[w]);
 	}
 
 	ext_printf("\n");

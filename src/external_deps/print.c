@@ -27,9 +27,16 @@ void ext_printf(const char *format, ...)
 	va_end(arglist);
 }
 #else
+#include <stdarg.h>
 void ext_printf(const char *format, ...)
 {
-	//Dummy print
+	#ifdef CUSTOM_RISCV_PRINT
+	va_list arglist;
+	va_start(arglist, format);
+	kprintf(format, arglist);
+	va_end(arglist);
+	
+	#endif
 }
 // #error "print.c: you have to implement ext_printf"
 #endif
