@@ -180,41 +180,45 @@
  * or not.
  */
 #ifdef NO_USE_COMPLETE_FORMULAS
-#define _LIBECC_CONCATENATE(a, b, c, d, e) a##_##b##_##c##_##d##_##e
-#define LIBECC_CONCATENATE(a, b, c, d, e) _LIBECC_CONCATENATE(a, b, c, d, e)
-void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
-		 WORDSIZE, MAX_DIGEST_SIZE) (void);
-#ifdef NN_CONSISTENCY_CHECK
-ATTRIBUTE_USED void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE,
-				wordsize, WORDSIZE, MAX_DIGEST_SIZE) (void) {
-	return;
-}
-#else
-ATTRIBUTE_USED static inline void nn_check_libconsistency(void)
-{
-	LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
-		    WORDSIZE, MAX_DIGEST_SIZE) ();
-	return;
-}
-#endif
+	#define _LIBECC_CONCATENATE(a, b, c, d, e) a##_##b##_##c##_##d##_##e
+	#define LIBECC_CONCATENATE(a, b, c, d, e) _LIBECC_CONCATENATE(a, b, c, d, e)
+	
+	void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
+			WORDSIZE, MAX_DIGEST_SIZE) (void);
+
+	#ifdef NN_CONSISTENCY_CHECK
+	ATTRIBUTE_USED void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE,
+					wordsize, WORDSIZE, MAX_DIGEST_SIZE) (void) {
+		return;
+	}
+	#else
+	ATTRIBUTE_USED static inline void nn_check_libconsistency(void)
+	{
+		LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
+				WORDSIZE, MAX_DIGEST_SIZE) ();
+		return;
+	}
+	#endif
 #else /* NO_USE_COMPLETE_FORMULAS */
-#define _LIBECC_CONCATENATE(a, b, c, d, e, f) a##_##b##_##c##_##d##_##e##_##f
-#define LIBECC_CONCATENATE(a, b, c, d, e, f) _LIBECC_CONCATENATE(a, b, c, d, e, f)
-void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
-		 WORDSIZE, complete_formulas, MAX_DIGEST_SIZE) (void);
-#ifdef NN_CONSISTENCY_CHECK
-ATTRIBUTE_USED void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE,
-				wordsize, WORDSIZE, complete_formulas, MAX_DIGEST_SIZE) (void) {
-	return;
-}
-#else
-ATTRIBUTE_USED static inline void nn_check_libconsistency(void)
-{
-	LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
-		    WORDSIZE, complete_formulas, MAX_DIGEST_SIZE) ();
-	return;
-}
-#endif
+	#define _LIBECC_CONCATENATE(a, b, c, d, e, f) a##_##b##_##c##_##d##_##e##_##f
+	#define LIBECC_CONCATENATE(a, b, c, d, e, f) _LIBECC_CONCATENATE(a, b, c, d, e, f)
+
+	void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
+			WORDSIZE, complete_formulas, MAX_DIGEST_SIZE) (void);
+
+	#ifdef NN_CONSISTENCY_CHECK
+	ATTRIBUTE_USED void LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE,
+					wordsize, WORDSIZE, complete_formulas, MAX_DIGEST_SIZE) (void) {
+		return;
+	}
+	#else
+	ATTRIBUTE_USED static inline void nn_check_libconsistency(void)
+	{
+		LIBECC_CONCATENATE(nn_consistency_check_maxbitlen, NN_MAX_BASE, wordsize,
+				WORDSIZE, complete_formulas, MAX_DIGEST_SIZE) ();
+		return;
+	}
+	#endif
 #endif /* NO_USE_COMPLETE_FORMULAS */
 
 #endif /* __NN_CONFIG_H__ */
