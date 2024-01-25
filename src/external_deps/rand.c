@@ -121,33 +121,8 @@ int get_random(unsigned char *buf, u16 len)
 {
 	//Implement HW random here
 	int ret;
-	u16 need = len, copied = 0;
-	u16 count = 4;
-
-	unsigned int rand;
-	rand = CUSTOM_RAND_GENERATE();
-	uint8_t buffer[4];
-
-	// buffer[0] = (rand >> 24) & 0xFF;
-    // buffer[1] = (rand >> 16) & 0xFF;
-    // buffer[2] = (rand >> 8) & 0xFF;
-    // buffer[3] = rand & 0xFF;
-	
-	*(uint32_t*)buffer = rand;
-
-	if (need <= 0) {
-		return -1;
-	} else {
-		local_memcpy((buf+copied), buffer, count);
-		copied = copied + count;
-		if((need-copied) < 4){
-			count = need-copied;
-		}else{
-			count = 4;
-		}
-	}
-
-	return 0;
+	ret = CUSTOM_RAND_GENERATE_BLOCK(buf, len);
+	return ret;
 }
 
 // #error "rand.c: you have to implement get_random with a proper entropy source!"

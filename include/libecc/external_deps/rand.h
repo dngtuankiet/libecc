@@ -19,15 +19,14 @@
 
 ATTRIBUTE_WARN_UNUSED_RET int get_random(unsigned char *buf, u16 len);
 
-// #define XMEMCPY(d,s,l)    local_memcpy((d),(s),(l))
-
-#ifdef CUSTOM_RAND_GENERATE
+#ifdef CUSTOM_RAND_GENERATE_BLOCK
     /* Seed Source */
     /* Size of returned HW RNG value */
     #define CUSTOM_RAND_TYPE      unsigned int
-    extern unsigned int my_rng_seed_gen(void);
-    #undef  CUSTOM_RAND_GENERATE
-    #define CUSTOM_RAND_GENERATE  my_rng_seed_gen
+    extern int my_rng_gen_block(unsigned char* buf, u16 len);
+    #undef  CUSTOM_RAND_GENERATE_BLOCK
+    #define CUSTOM_RAND_GENERATE_BLOCK  my_rng_gen_block
+
 #endif
 
 #endif /* __RAND_H__ */
